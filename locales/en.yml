@@ -3,3 +3,5 @@ en:
     description: Allows users to describe how people should pronounce their name.
     settings:
       example_setting: A description of a setting.
+  record: Record
+  stop: stop

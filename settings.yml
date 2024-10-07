@@ -1,2 +1,4 @@
-example_setting:
-  default: true
+svg_icons:
+  default: "square"
+  type: "list"
+  list_type: "compact"
