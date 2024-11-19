@@ -1,26 +1,24 @@
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import { cancel, later } from "@ember/runloop";
+import DButton from "discourse/components/d-button";
+import concatClass from "discourse/helpers/concat-class";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import i18n from "discourse-common/helpers/i18n";
-import concatClass from "discourse/helpers/concat-class";
-import not from "truth-helpers/helpers/not";
-import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { bind } from "discourse-common/utils/decorators";
-import Component from "@glimmer/component";
-import { concat } from "@ember/helper";
-import DButton from "discourse/components/d-button";
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
-import { cancel, later } from "@ember/runloop";
+import not from "truth-helpers/helpers/not";
 
 const MAX_DURATION_SECONDS = 5;
 
 export default class PronunciationControl extends Component {
+  @tracked isRecording = false;
   mediaRecorder = null;
 
   isUserMediaSupported = navigator.mediaDevices?.getUserMedia;
 
   chunks = [];
-
-  @tracked isRecording = false;
 
   willDestroy() {
     super.willDestroy(...arguments);
@@ -75,7 +73,7 @@ export default class PronunciationControl extends Component {
   }
 
   @bind
-  onStop(event) {
+  onStop() {
     const blob = new Blob(this.chunks, { type: this.mediaRecorder.mimeType });
     this.chunks = [];
     const audioURL = window.URL.createObjectURL(blob);
