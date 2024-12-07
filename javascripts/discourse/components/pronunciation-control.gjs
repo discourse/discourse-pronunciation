@@ -111,7 +111,7 @@ export default class PronunciationControl extends Component {
             />
             <DButton
               @disabled={{this.isRecording}}
-              @icon="trash-alt"
+              @icon="trash-can"
               @action={{this.delete}}
               class="btn-danger"
             />
